@@ -1,10 +1,11 @@
 ARG BASE=python:3.11-bookworm
 FROM $BASE
+ARG TARGETARCH
 
 COPY image/ /
 
 # Add RaspberryPi specific packages upstream
-RUN dpkg --add-architecture armhf \
+RUN dpkg --add-architecture $TARGETARCH \
  && echo "deb http://archive.raspberrypi.org/debian/ $(sh -c '. /etc/os-release; echo $VERSION_CODENAME') main" > /etc/apt/sources.list.d/raspi.list \
  && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \

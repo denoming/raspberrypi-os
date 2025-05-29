@@ -5,7 +5,7 @@ set -e
 ROOT=$(dirname "$(dirname "$(realpath -s $0)")")
 
 BASE="${1:-python:3.11-bookworm}"
-PLATFORMS="${2:-linux/arm64/v8,linux/arm/v7}"
+PLATFORMS="${2:-linux/arm64/v8}"
 
 IMAGE_NAME="denoming/raspberrypi-os:${BASE//:}"
 
