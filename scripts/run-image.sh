@@ -2,32 +2,28 @@
 
 set -e
 
-BASE="${1:-python:3.11-bookworm}"
-ARCH="${2:-arm64/v8}"
-USER_NAME="${3:-$(whoami)}"
+base_container="${1:-python:3.12-bookworm}"
+platform="${2:-arm64}"
 
-IMAGE_NAME="denoming/raspberrypi-os:${BASE//:}"
-USER_UID="$(id ${USER_NAME} -u)"
-USER_GID="$(id ${USER_NAME} -g)"
+image="denoming/raspberrypi-os:${base_container//:}"
+user_uid="$(id -u)"
+user_gid="$(id -g)"
 
-echo "=============================="
-echo "    Image: ${IMAGE_NAME}"
-echo "     Arch: ${ARCH}"
-echo "     User: ${USER_NAME}"
-echo "  User ID: ${USER_UID}"
-echo " Group ID: ${USER_GID}"
-echo "=============================="
+echo "===================================="
+echo "      Image: ${image}"
+echo "  Platforms: ${platforms}"
+echo "===================================="
 
 run_image()
 {
-  RUN_CMD=(docker run -it \
-  --platform "linux/${ARCH}" \
+  CMD=(docker run -it \
+  --platform "linux/${platform}" \
   --rm \
-  --user "${USER_UID}:${USER_GID}" \
+  --user "${user_uid}:${user_gid}" \
   --network "host" \
-  "${IMAGE_NAME}" /bin/bash)
+  "${image}" /bin/bash)
 
-  "${RUN_CMD[@]}"
+  "${CMD[@]}"
 }
 
 main()

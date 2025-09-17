@@ -2,16 +2,16 @@
 
 set -e
 
-ROOT=$(dirname "$(dirname "$(realpath -s $0)")")
+root_dir=$(dirname "$(dirname "$(realpath -s $0)")")
 
-BASE="${1:-python:3.11-bookworm}"
-PLATFORMS="${2:-linux/arm64/v8}"
+base_container="${1:-python:3.12-bookworm}"
+platforms="${2:-linux/amd64,linux/arm64}"
 
-IMAGE_NAME="denoming/raspberrypi-os:${BASE//:}"
+image="denoming/raspberrypi-os:${base_container//:}"
 
 echo "===================================="
-echo "  Platforms: ${PLATFORMS}"
-echo "      Image: ${IMAGE_NAME}"
+echo "      Image: ${image}"
+echo "  Platforms: ${platforms}"
 echo "===================================="
 
 command -v docker > /dev/null
@@ -23,17 +23,17 @@ fi
 
 build_image()
 {
-  BUILD_CMD=(docker buildx build \
-  --platform "${PLATFORMS}" \
-  --tag "${IMAGE_NAME}" \
+  CMD=(docker buildx build \
+  --platform "${platforms}" \
+  --tag "${image}" \
   --push \
-  --build-arg="BASE=${BASE}" \
-  --file "${ROOT}/Dockerfile"
-  "${ROOT}")
+  --build-arg="BASE_CONTAINER=${base_container}" \
+  --file "${root_dir}/Dockerfile" \
+  "${root_dir}")
 
-  echo -e "Building <${IMAGE_NAME}> image"
-  echo "${BUILD_CMD[@]}"
-  "${BUILD_CMD[@]}"
+  echo -e "Building <${image}> image"
+  echo "${CMD[@]}"
+  "${CMD[@]}"
 }
 
 main()
