@@ -20,27 +20,27 @@ Here are Docker container base images for building and running software that req
 
 From your Dockerfile,
 ```Dockerfile
-FROM denoming/raspberrypi-os:bookworm
+FROM denoming/raspberrypi-os:trixie
 ```
 
 Or from the command line
 ```bash
-$ docker run -it denoming/raspberrypi-os:bookworm
+$ docker run -it denoming/raspberrypi-os:trixie
 ```
 
 # Containers
 
-**Debian (Bookworm)**
-  * Base image: `debian:bookworm`
+**Debian (Trixie)**
+  * Base image: `debian:trixie`
   * Image names: `denoming/raspberrypi-os:latest`, `ghcr.io/denoming/raspberrypi-os:latest`
-  * Tags: `latest`, `bookworm`
+  * Tags: `latest`, `trixie`
 
-**Python 3.13 (Debian Bookworm)**
-  * Base image: `python:3.13-bookworm`
+**Python 3.13 (Debian Trixie)**
+  * Base image: `python:3.13-trixie`
   * Image names: `denoming/raspberrypi-os:python`, `ghcr.io/denoming/raspberrypi-os:python`
-  * Tags: `python`, `python-bookworm`, `python3.13`, `python3.13-bookworm`
+  * Tags: `python`, `python-trixie`, `python3.13`, `python3.13-trixie`
 
-**Python 3.12 (Debian Bookworm)**
-  * Base image: `python:3.12-bookworm`
+**Python 3.12 (Debian Trixie)**
+  * Base image: `python:3.12-trixie`
   * Image names: `denoming/raspberrypi-os:python`, `ghcr.io/denoming/raspberrypi-os:python`
-  * Tags: `python3.12`, `python3.12-bookworm`
+  * Tags: `python3.12`, `python3.12-trixie`

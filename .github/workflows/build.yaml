@@ -1,6 +1,10 @@
 name: Build Containers
 
 on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
   workflow_dispatch:
     branches: [ "main" ]
   schedule:
@@ -23,12 +27,13 @@ jobs:
     strategy:
       matrix:
         include:
-          - baseimage: "debian:bookworm"
-            tags: ["latest", "bookworm"]
-          - baseimage: "python:3.13-bookworm"
-            tags: ["python", "python-bookworm", "python3.13", "python3.13-bookworm"]
-          - baseimage: "python:3.12-bookworm"
-            tags: ["python3.12", "python3.12-bookworm"]
+          - baseimage: "debian:trixie"
+            tags: ["latest", "trixie"]
+          - baseimage: "python:3.13-trixie"
+            tags: ["python", "python-trixie", "python3.13", "python3.13-trixie"]
+          - baseimage: "python:3.12-trixie"
+            tags: ["python3.12", "python3.12-trixie"]
+
     steps:
       - name: Set variables
         id: vars

@@ -2,12 +2,10 @@
 
 set -e
 
-base_container="${1:-python:3.12-bookworm}"
+base_container="${1:-python:3.12-trixie}"
 platform="${2:-arm64}"
 
 image="denoming/raspberrypi-os:${base_container//:}"
-user_uid="$(id -u)"
-user_gid="$(id -g)"
 
 echo "===================================="
 echo "      Image: ${image}"
@@ -19,7 +17,6 @@ run_image()
   CMD=(docker run -it \
   --platform "linux/${platform}" \
   --rm \
-  --user "${user_uid}:${user_gid}" \
   --network "host" \
   "${image}" /bin/bash)
 
